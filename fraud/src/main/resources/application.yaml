@@ -1,0 +1,36 @@
+server:
+  port: 8081
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+    enabled: true
+
+spring:
+  application:
+    name: fraud
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fraud
+    username: user
+    password: password
+    driverClassName: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10  # Optional: controls connection pool size
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true  # Optional: formats SQL queries in the log
+    show-sql: true  # Optional: shows SQL queries in the console
+
+  # Show logs in colored mode
+  output:
+    ansi:
+      enabled: ALWAYS

@@ -1,0 +1,19 @@
+server:
+  port:
+    8761
+
+eureka:
+  client:
+    # Indicate whether this client should fetch eureka registry information form eureka server
+    fetch-registry: false
+    # Indicate whether this instance should register its information with eureka server for discovery by others
+    register-with-eureka: false
+
+spring:
+  application:
+    name: eureka-server
+
+  # Show logs in colored mode
+  output:
+    ansi:
+      enabled: ALWAYS
