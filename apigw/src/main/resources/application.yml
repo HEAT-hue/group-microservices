@@ -1,22 +1,30 @@
-server:
-  port:
-    8761
-
-eureka:
-  client:
-    # Indicate whether this client should fetch eureka registry information form eureka server
-    fetch-registry: false
-    # Indicate whether this instance should register its information with eureka server for discovery by others
-    register-with-eureka: false
-
 spring:
   application:
-    name: eureka-server
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: customer
+          uri: lb://CUSTOMER
+          predicates:
+            - Path=/api/v1/customer/**
 
   # Show logs in colored mode
   output:
     ansi:
       enabled: ALWAYS
+
+server:
+  port: 8083
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+    enabled: true
+
 
 management:
   tracing:

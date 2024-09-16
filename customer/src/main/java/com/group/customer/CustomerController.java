@@ -1,5 +1,6 @@
 package com.group.customer;
 
+import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,11 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping("customer")
+    @Observed(
+            name = "user.name",
+            contextualName = "Register customer",
+            lowCardinalityKeyValues = {"userType", "userType2"}
+    )
     public void registerCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest) {
         log.info("new customer registration {}", customerRegistrationRequest);
         customerService.registerCustomer(customerRegistrationRequest);
